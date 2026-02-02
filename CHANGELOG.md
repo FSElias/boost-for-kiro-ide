@@ -2,7 +2,43 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
-## [Unreleased]
+## [2.0.0] - 2026-02-02
+
+### Changed
+
+- Updated Laravel Boost dependency from ^1.0 to ^2.0
+
+### Added
+
+- Added support for Laravel Boost v2.0 Skills system (works automatically)
+- Verified compatibility with all Laravel Boost v2.0 features
+
+### Notes
+
+- No code changes required - Skills system works automatically with Kiro IDE
+- The package continues to implement the same interfaces (Agent, McpClient, CodeEnvironment)
+- All existing functionality remains unchanged and fully compatible
+
+### Migration
+
+To upgrade to Laravel Boost v2.0:
+
+1. Update your dependencies:
+   ```bash
+   composer update jotafurtado/boost-for-kiro-ide laravel/boost
+   ```
+
+2. Re-run the Boost installation to ensure all configurations are up to date:
+   ```bash
+   php artisan boost:install
+   ```
+
+3. (Optional) Install Skills using the new command:
+   ```bash
+   php artisan boost:add-skill owner/repo
+   ```
+
+For more information about the Skills system, see [docs/SKILLS_SYSTEM.md](docs/SKILLS_SYSTEM.md).
 
 ## [1.0.6] - 2026-01-04
 

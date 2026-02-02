@@ -13,7 +13,7 @@ class BoostForKiroServiceProvider extends ServiceProvider
     /**
      * Bootstrap any package services.
      *
-     * This method registers the Kiro IDE code environment with Laravel Boost
+     * This method registers the Kiro IDE agent with Laravel Boost
      * using the extension hook provided by the package.
      */
     public function boot(): void

@@ -6,11 +6,11 @@ use Jcf\BoostForKiro\CodeEnvironment\Kiro;
 use Laravel\Boost\Boost;
 
 it('registers kiro code environment with boost', function () {
-    $environments = Boost::getCodeEnvironments();
+    $agents = Boost::getAgents();
 
-    expect($environments)
+    expect($agents)
         ->toHaveKey('kiro')
-        ->and($environments['kiro'])
+        ->and($agents['kiro'])
         ->toBe(Kiro::class);
 });
 

@@ -14,3 +14,4 @@ declare(strict_types=1);
 */
 
 uses(Tests\TestCase::class)->in('Unit');
+uses(Tests\TestCase::class)->in('Integration');

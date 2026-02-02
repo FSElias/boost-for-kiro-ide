@@ -18,7 +18,7 @@ Laravel Boost accelerates AI-assisted development by providing the essential con
 
 - PHP 8.1 or higher
 - Laravel 10.x, 11.x or 12.x
-- [Laravel Boost](https://github.com/laravel/boost) ^1.0
+- [Laravel Boost](https://github.com/laravel/boost) ^2.0
 - Kiro IDE installed on your system
 
 ## Installation
@@ -30,6 +30,9 @@ composer require jcf/boost-for-kiro-ide --dev
 ```
 
 The package automatically registers Kiro IDE with Laravel Boost through Laravel's auto-discovery.
+
+> **✨ Laravel Boost v2.0 Improvements**  
+> This package is fully compatible with Laravel Boost v2.0, which brings an enhanced installation experience with improved code environment detection, streamlined configuration, and the powerful new Skills system. After installation, you'll have access to the `boost:add-skill` command to extend Kiro's capabilities with specialized AI instructions.
 
 ## Usage
 
@@ -58,6 +61,44 @@ In Kiro IDE:
 3. The `laravel-boost` MCP server will be automatically detected and connected
 
 Kiro automatically loads the AI guidelines from `.kiro/steering/laravel-boost.md` to provide contextualized assistance for your Laravel application.
+
+### 4. Extend with Skills (Optional)
+
+After installation, you can enhance Kiro's capabilities by installing Skills:
+
+```bash
+php artisan boost:add-skill laravel/boost-skill-livewire
+```
+
+Skills provide specialized AI instructions for specific Laravel development tasks. See the [Skills System Support](#skills-system-support) section below for more details.
+
+### Complete Installation Flow Example
+
+Here's a complete example of setting up a new Laravel project with Kiro IDE and Skills:
+
+```bash
+# 1. Create a new Laravel project
+composer create-project laravel/laravel my-project
+cd my-project
+
+# 2. Install Laravel Boost and this package
+composer require laravel/boost --dev
+composer require jcf/boost-for-kiro-ide --dev
+
+# 3. Run the Boost installation wizard
+php artisan boost:install
+# → Select "Kiro IDE" from the list
+# → Configuration files are created automatically
+
+# 4. (Optional) Install Skills to extend capabilities
+php artisan boost:add-skill laravel/boost-skill-livewire
+php artisan boost:add-skill laravel/boost-skill-testing
+
+# 5. Open in Kiro IDE and reconnect MCP servers
+# → Cmd+Shift+P (or Ctrl+Shift+P)
+# → "MCP: Reconnect All Servers"
+# → Start developing with AI assistance!
+```
 
 ## Created File Structure
 
@@ -109,13 +150,68 @@ You can also automate this process by adding it to your Composer scripts:
 }
 ```
 
+## Skills System Support
+
+Laravel Boost v2.0 introduces a powerful **Skills system** that extends AI-assisted development with specialized, reusable instructions. The boost-for-kiro-ide package provides **zero-configuration** support for Skills - they work automatically with Kiro IDE.
+
+### What are Skills?
+
+Skills are modular AI instructions (markdown files) that enhance Kiro's ability to perform specific Laravel development tasks. They provide specialized knowledge, workflow automation, and best practices for common patterns.
+
+### Installing Skills
+
+Install skills from GitHub repositories using the `boost:add-skill` command:
+
+```bash
+php artisan boost:add-skill owner/repository
+```
+
+**Example:**
+```bash
+php artisan boost:add-skill laravel/boost-skill-livewire
+```
+
+Skills are automatically:
+- Downloaded and installed to `.ai/skills/`
+- Loaded by Laravel Boost
+- Made available to Kiro IDE through the MCP protocol
+- **No additional configuration required!**
+
+### How It Works
+
+1. **Automatic Loading**: Laravel Boost loads skills from `.ai/skills/`
+2. **MCP Integration**: Skills are delivered to Kiro through the Model Context Protocol
+3. **Zero Configuration**: No Kiro-specific setup needed - it just works!
+4. **Immediate Availability**: Skills are available in Kiro's AI context right away
+
+### Creating Custom Skills
+
+You can create custom skills for your team:
+
+```bash
+mkdir -p .ai/skills/my-custom-skill
+touch .ai/skills/my-custom-skill/SKILL.md
+```
+
+Write your skill instructions in the `SKILL.md` file, and it's automatically available to Kiro.
+
+### Learn More
+
+For detailed information about the Skills system, including:
+- How skills work with Kiro IDE
+- Creating and customizing skills
+- Skill override capabilities
+- Troubleshooting and best practices
+
+See [docs/SKILLS_SYSTEM.md](docs/SKILLS_SYSTEM.md) for complete documentation.
+
 ## Compatibility
 
-This package is designed to be compatible with all versions of Laravel Boost ^1.0. It uses the extension hooks provided by Laravel Boost to register the Kiro code environment.
+This package is designed to be compatible with all versions of Laravel Boost ^2.0. It uses the extension hooks provided by Laravel Boost to register the Kiro code environment.
 
 ### Tested Versions
 
-- Laravel Boost: ^1.0
+- Laravel Boost: ^2.0
 - Laravel: 10.x, 11.x, 12.x
 - PHP: 8.1, 8.2, 8.3
 
