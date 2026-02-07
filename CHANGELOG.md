@@ -2,6 +2,14 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.0.2] - 2026-02-07
+
+### Fixed
+
+- Fixed Kiro not appearing in `boost:install` command agent selection
+- Changed ServiceProvider registration to use `register()` method with `booted()` callback
+- Ensures Kiro is registered before boost:install command runs
+
 ## [2.0.1] - 2026-02-07
 
 ### Removed
