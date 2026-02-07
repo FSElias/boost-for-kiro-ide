@@ -1,6 +1,7 @@
 /vendor/
 /node_modules/
 /build/
+/.kiro/
 composer.lock
 .phpunit.result.cache
 .php-cs-fixer.cache

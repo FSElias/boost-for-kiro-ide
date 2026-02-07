@@ -22,15 +22,15 @@ use Laravel\Boost\Install\Enums\Platform;
 describe('Boost Install Command Integration', function () {
     it('kiro agent is registered with Boost', function () {
         // Verify that Kiro is registered as an agent
-        $agents = Boost::getAgents();
+        $codeEnvironments = Boost::getCodeEnvironments();
 
-        expect($agents)->toHaveKey('kiro')
-            ->and($agents['kiro'])->toBe(Kiro::class);
+        expect($codeEnvironments)->toHaveKey('kiro')
+            ->and($codeEnvironments['kiro'])->toBe(Kiro::class);
     });
 
     it('kiro agent can be instantiated from registry', function () {
-        $agents = Boost::getAgents();
-        $kiroClass = $agents['kiro'];
+        $codeEnvironments = Boost::getCodeEnvironments();
+        $kiroClass = $codeEnvironments['kiro'];
 
         $kiro = app($kiroClass);
 
@@ -88,8 +88,8 @@ describe('Boost Install Command Integration', function () {
     it('kiro implements required interfaces for boost:install', function () {
         $kiro = app(Kiro::class);
 
-        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Install\Agents\Agent::class)
-            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsGuidelines::class)
-            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsMcp::class);
+        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Install\CodeEnvironment\CodeEnvironment::class)
+            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\Agent::class)
+            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\McpClient::class);
     });
 });

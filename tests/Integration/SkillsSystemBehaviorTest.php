@@ -21,9 +21,9 @@ describe('Skills System Behavior', function () {
         $kiro = app(Kiro::class);
 
         // Verify all interfaces required for Skills system
-        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Install\Agents\Agent::class)
-            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsGuidelines::class)
-            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsMcp::class);
+        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Install\CodeEnvironment\CodeEnvironment::class)
+            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\Agent::class)
+            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\McpClient::class);
     });
 
     it('confirms no additional kiro configuration is needed for skills', function () {
@@ -48,13 +48,13 @@ describe('Skills System Behavior', function () {
 
     it('confirms skills are loaded automatically by laravel boost', function () {
         // Kiro is registered as an agent
-        $agents = Boost::getAgents();
-        expect($agents)->toHaveKey('kiro');
+        $codeEnvironments = Boost::getCodeEnvironments();
+        expect($codeEnvironments)->toHaveKey('kiro');
 
         // Laravel Boost handles skill loading through the agent registration
         // No additional configuration needed in Kiro
         $kiro = app(Kiro::class);
-        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Install\Agents\Agent::class);
+        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\Agent::class);
     });
 
     it('confirms guidelines path is configured for skill integration', function () {
@@ -88,13 +88,13 @@ describe('Skills System Behavior', function () {
 
     it('confirms kiro agent registration is persistent', function () {
         // First check
-        $agents1 = Boost::getAgents();
-        expect($agents1)->toHaveKey('kiro');
+        $codeEnvironments1 = Boost::getCodeEnvironments();
+        expect($codeEnvironments1)->toHaveKey('kiro');
 
         // Second check - should be the same
-        $agents2 = Boost::getAgents();
-        expect($agents2)->toHaveKey('kiro')
-            ->and($agents1['kiro'])->toBe($agents2['kiro']);
+        $codeEnvironments2 = Boost::getCodeEnvironments();
+        expect($codeEnvironments2)->toHaveKey('kiro')
+            ->and($codeEnvironments1['kiro'])->toBe($codeEnvironments2['kiro']);
     });
 
     it('confirms kiro provides all required configuration for boost:add-skill', function () {
@@ -112,13 +112,13 @@ describe('Skills System Behavior', function () {
         // This test verifies the documentation claim that zero configuration is required
 
         // 1. Kiro is registered automatically via ServiceProvider
-        $agents = Boost::getAgents();
-        expect($agents)->toHaveKey('kiro');
+        $codeEnvironments = Boost::getCodeEnvironments();
+        expect($codeEnvironments)->toHaveKey('kiro');
 
         // 2. All interfaces are implemented
         $kiro = app(Kiro::class);
-        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsGuidelines::class)
-            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsMcp::class);
+        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\Agent::class)
+            ->and($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\McpClient::class);
 
         // 3. Paths are configured
         expect($kiro->guidelinesPath())->toBeString()

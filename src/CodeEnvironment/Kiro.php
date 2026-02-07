@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Jcf\BoostForKiro\CodeEnvironment;
 
-use Laravel\Boost\Contracts\SupportsGuidelines;
-use Laravel\Boost\Contracts\SupportsMcp;
-use Laravel\Boost\Install\Agents\Agent;
+use Laravel\Boost\Contracts\Agent;
+use Laravel\Boost\Contracts\McpClient;
+use Laravel\Boost\Install\CodeEnvironment\CodeEnvironment;
 use Laravel\Boost\Install\Enums\Platform;
 
 /**
@@ -19,7 +19,7 @@ use Laravel\Boost\Install\Enums\Platform;
  * - Creating AI guidelines at .kiro/steering/laravel-boost.md
  * - Supporting Kiro as both an editor and an AI agent
  */
-class Kiro extends Agent implements SupportsGuidelines, SupportsMcp
+class Kiro extends CodeEnvironment implements Agent, McpClient
 {
     /**
      * Get the internal name identifier for Kiro.
@@ -79,7 +79,7 @@ class Kiro extends Agent implements SupportsGuidelines, SupportsMcp
     /**
      * Get the path to Kiro's MCP configuration file.
      */
-    public function mcpConfigPath(): string
+    public function mcpConfigPath(): ?string
     {
         return '.kiro/settings/mcp.json';
     }

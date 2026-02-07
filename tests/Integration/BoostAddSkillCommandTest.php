@@ -21,10 +21,10 @@ use Laravel\Boost\Boost;
  */
 describe('Boost Add Skill Command Integration', function () {
     it('kiro agent is registered and available for skill installation', function () {
-        $agents = Boost::getAgents();
+        $codeEnvironments = Boost::getCodeEnvironments();
 
-        expect($agents)->toHaveKey('kiro')
-            ->and($agents['kiro'])->toBe(Kiro::class);
+        expect($codeEnvironments)->toHaveKey('kiro')
+            ->and($codeEnvironments['kiro'])->toBe(Kiro::class);
     });
 
     it('kiro agent can be instantiated for skill operations', function () {
@@ -45,16 +45,16 @@ describe('Boost Add Skill Command Integration', function () {
             ->and($guidelinesPath)->toContain('steering');
     });
 
-    it('kiro implements SupportsGuidelines interface for skills', function () {
+    it('kiro implements Agent interface', function () {
         $kiro = app(Kiro::class);
 
-        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsGuidelines::class);
+        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\Agent::class);
     });
 
-    it('kiro implements SupportsMcp interface for skill communication', function () {
+    it('kiro implements McpClient interface', function () {
         $kiro = app(Kiro::class);
 
-        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\SupportsMcp::class);
+        expect($kiro)->toBeInstanceOf(\Laravel\Boost\Contracts\McpClient::class);
     });
 
     it('kiro provides mcp config path for skill mcp servers', function () {
@@ -80,14 +80,14 @@ describe('Boost Add Skill Command Integration', function () {
 
     it('kiro agent registration persists across container resolutions', function () {
         // First resolution
-        $agents1 = Boost::getAgents();
+        $codeEnvironments1 = Boost::getCodeEnvironments();
         $kiro1 = app(Kiro::class);
 
         // Second resolution
-        $agents2 = Boost::getAgents();
+        $codeEnvironments2 = Boost::getCodeEnvironments();
         $kiro2 = app(Kiro::class);
 
-        expect($agents1)->toEqual($agents2)
+        expect($codeEnvironments1)->toEqual($codeEnvironments2)
             ->and($kiro1->name())->toBe($kiro2->name())
             ->and($kiro1->displayName())->toBe($kiro2->displayName());
     });

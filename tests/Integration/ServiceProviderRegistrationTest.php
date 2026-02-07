@@ -22,12 +22,12 @@ describe('ServiceProvider Registration Integration', function () {
     });
 
     it('registers kiro agent with Boost', function () {
-        $agents = Boost::getAgents();
+        $codeEnvironments = Boost::getCodeEnvironments();
 
-        expect($agents)
+        expect($codeEnvironments)
             ->toBeArray()
             ->toHaveKey('kiro')
-            ->and($agents['kiro'])
+            ->and($codeEnvironments['kiro'])
             ->toBe(Kiro::class);
     });
 

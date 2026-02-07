@@ -6,7 +6,17 @@ All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
 ### Changed
 
-- Updated Laravel Boost dependency from ^1.0 to ^2.0
+- **BREAKING**: Updated to support Laravel Boost 1.8.2+ with new CodeEnvironment API
+- Changed from standalone interfaces to `CodeEnvironment` base class with `Agent` and `McpClient` contracts
+- Updated `mcpConfigPath()` return type from `string` to `?string` to match new interface
+- Improved ServiceProvider to handle cases where BoostManager is not available
+- Updated all tests to use new `getCodeEnvironments()` method instead of deprecated `getAgents()`
+
+### Fixed
+
+- Fixed compatibility with Laravel Boost 1.8.x API changes
+- Fixed ServiceProvider registration to work correctly when Boost is disabled or not configured
+- Fixed error "Call to undefined method Laravel\Boost\BoostManager::registerCodeEnvironment()" in projects where Boost is not properly initialized
 
 ### Added
 
@@ -24,11 +34,13 @@ All notable changes to `boost-for-kiro-ide` will be documented in this file.
 To upgrade to Laravel Boost v2.0:
 
 1. Update your dependencies:
+
    ```bash
    composer update jotafurtado/boost-for-kiro-ide laravel/boost
    ```
 
 2. Re-run the Boost installation to ensure all configurations are up to date:
+
    ```bash
    php artisan boost:install
    ```
