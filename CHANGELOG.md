@@ -2,6 +2,29 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.0.3] - 2026-02-07
+
+### Fixed
+
+- Fixed ServiceProvider to use `Boost::registerCodeEnvironment()` in `boot()` instead of legacy `$this->app->booted()` + manual `BoostManager` resolution in `register()` — this was the root cause of Kiro not appearing in `boost:install`
+- Changed `mcpConfigPath()` return type from `?string` to `string` to match reference implementations
+- Added explicit `mcpInstallationStrategy()` method returning `McpInstallationStrategy::FILE`
+
+### Removed
+
+- Removed legacy `$this->app->booted()` callback from ServiceProvider
+- Removed manual `BoostManager` resolution via `$this->app->make()`
+- Removed unnecessary try/catch block in ServiceProvider
+- Removed `BoostManager` import from ServiceProvider
+- Removed verbose docblocks from `Kiro` class to align with reference style
+- Removed redundant integration test files (`BoostAddSkillCommandTest`, `ConfigurationPathsTest`, `FrontmatterConfigurationTest`, `InstallationDetectionTest`, `SkillsSystemBehaviorTest`)
+
+### Changed
+
+- ServiceProvider now follows the documented pattern: empty `register()`, registration via Facade in `boot()`
+- Aligned `Kiro` class with `ClaudeCode.php` reference implementation
+- Rewrote unit and integration tests to validate correct registration behavior
+
 ## [2.0.2] - 2026-02-07
 
 ### Fixed
@@ -69,7 +92,7 @@ To upgrade to Laravel Boost v2.0:
    php artisan boost:add-skill owner/repo
    ```
 
-For more information about the Skills system, see [docs/SKILLS_SYSTEM.md](docs/SKILLS_SYSTEM.md).
+For more information about the Skills system, see the [Laravel Boost documentation](https://github.com/laravel/boost).
 
 ## [1.0.6] - 2026-01-04
 

@@ -5,19 +5,16 @@ declare(strict_types=1);
 use Jcf\BoostForKiro\BoostForKiroServiceProvider;
 use Jcf\BoostForKiro\CodeEnvironment\Kiro;
 use Laravel\Boost\Boost;
+use Laravel\Boost\Install\Detection\DetectionStrategyFactory;
 
 /**
- * Example 3: ServiceProvider Registra Sem Erros
+ * ServiceProvider Registration and Container Resolution Integration Tests.
  *
- * Valida: Requisitos 3.1
- *
- * Quando o método boot() do BoostForKiroServiceProvider é chamado,
- * ele deve executar Boost::registerAgent('kiro', Kiro::class) sem lançar exceções.
+ * Valida: Requisitos 1.1, 1.4, 3.1, 3.2, 3.3
+ * Example 8: Container resolve Kiro com DetectionStrategyFactory
  */
 describe('ServiceProvider Registration Integration', function () {
     it('boots without throwing exceptions', function () {
-        // The ServiceProvider is already booted by the TestCase setup
-        // This test verifies that no exceptions were thrown during boot
         expect(true)->toBeTrue();
     });
 
@@ -39,9 +36,27 @@ describe('ServiceProvider Registration Integration', function () {
     });
 
     it('service provider can be instantiated without exceptions', function () {
-        // Create a fresh instance of the service provider
-        // The boot method is already called during TestCase setup
-        // This test verifies that instantiation works correctly
         expect(fn () => new BoostForKiroServiceProvider(app()))->not->toThrow(Exception::class);
+    });
+
+    it('resolves Kiro with DetectionStrategyFactory injected', function () {
+        $kiro = app(Kiro::class);
+
+        // The strategyFactory is a protected property injected via CodeEnvironment constructor
+        $reflection = new ReflectionClass($kiro);
+        $property = $reflection->getProperty('strategyFactory');
+        $property->setAccessible(true);
+
+        expect($property->getValue($kiro))->toBeInstanceOf(DetectionStrategyFactory::class);
+    });
+
+    it('inherited detectInProject executes without errors', function () {
+        $kiro = app(Kiro::class);
+
+        // detectInProject uses the injected DetectionStrategyFactory
+        // It should execute without errors even if the path doesn't exist
+        $result = $kiro->detectInProject(sys_get_temp_dir());
+
+        expect($result)->toBeBool();
     });
 });
