@@ -167,11 +167,13 @@ php artisan boost:add-skill owner/repository
 ```
 
 **Example:**
+
 ```bash
 php artisan boost:add-skill laravel/boost-skill-livewire
 ```
 
 Skills are automatically:
+
 - Downloaded and installed to `.ai/skills/`
 - Loaded by Laravel Boost
 - Made available to Kiro IDE through the MCP protocol
@@ -195,15 +197,7 @@ touch .ai/skills/my-custom-skill/SKILL.md
 
 Write your skill instructions in the `SKILL.md` file, and it's automatically available to Kiro.
 
-### Learn More
-
-For detailed information about the Skills system, including:
-- How skills work with Kiro IDE
-- Creating and customizing skills
-- Skill override capabilities
-- Troubleshooting and best practices
-
-See [docs/SKILLS_SYSTEM.md](docs/SKILLS_SYSTEM.md) for complete documentation.
+For more information about the Skills system, see the [Laravel Boost documentation](https://github.com/laravel/boost).
 
 ## Compatibility
 

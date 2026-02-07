@@ -2,6 +2,17 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.0.1] - 2026-02-07
+
+### Removed
+
+- Removed `docs/` folder - unnecessary for a complementary package
+- Removed `.kiro/` folder from repository and added to `.gitignore`
+
+### Changed
+
+- Cleaned up repository structure to focus on core functionality
+
 ## [2.0.0] - 2026-02-02
 
 ### Changed
