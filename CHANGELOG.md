@@ -2,6 +2,35 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.0.3] - 2026-02-07
+
+### Changed
+
+- **BREAKING**: Bumped minimum PHP version from `^8.1` to `^8.2` (required by `laravel/boost ^2.0`)
+- **BREAKING**: Dropped Laravel 10 support (Testbench `^8.x` removed, now `^9.15|^10.6`)
+- **BREAKING**: Dropped Pest 2.x support (now `^3.8.4` only)
+- Updated to Laravel Boost v2.1.1 API: `Kiro` now extends `Agent` (was `CodeEnvironment`) and implements `SupportsGuidelines`, `SupportsMcp`, `SupportsSkills` (was `Agent`, `McpClient`)
+- ServiceProvider now uses `Boost::registerAgent()` instead of legacy `Boost::registerCodeEnvironment()`
+- ServiceProvider follows the documented pattern: empty `register()`, registration via Facade in `boot()`
+- Aligned `Kiro` class with `ClaudeCode.php` reference implementation
+
+### Added
+
+- Added `skillsPath()` method returning `'.kiro/skills'` (implements `SupportsSkills` contract)
+- Added explicit `mcpInstallationStrategy()` method returning `McpInstallationStrategy::FILE`
+
+### Fixed
+
+- Fixed ServiceProvider to use `Boost::registerAgent()` in `boot()` instead of legacy `$this->app->booted()` + manual `BoostManager` resolution in `register()` — root cause of Kiro not appearing in `boost:install`
+- Changed `mcpConfigPath()` return type from `?string` to `string` to match reference implementations
+
+### Removed
+
+- Removed legacy `$this->app->booted()` callback, manual `BoostManager` resolution, try/catch block, and `BoostManager` import from ServiceProvider
+- Removed verbose docblocks from `Kiro` class
+- Removed redundant integration test files
+- Dropped PHP 8.1 and Laravel 10 from CI test matrix
+
 ## [2.0.2] - 2026-02-07
 
 ### Fixed
@@ -69,7 +98,7 @@ To upgrade to Laravel Boost v2.0:
    php artisan boost:add-skill owner/repo
    ```
 
-For more information about the Skills system, see [docs/SKILLS_SYSTEM.md](docs/SKILLS_SYSTEM.md).
+For more information about the Skills system, see the [Laravel Boost documentation](https://github.com/laravel/boost).
 
 ## [1.0.6] - 2026-01-04
 

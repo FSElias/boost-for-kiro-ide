@@ -16,7 +16,7 @@ abstract class TestCase extends OrchestraTestCase
         $app['env'] = 'local';
 
         $app->singleton('mcp', Registrar::class);
-        
+
         // Force register BoostManager for tests since BoostServiceProvider::shouldRun() returns false in tests
         $app->singleton(\Laravel\Boost\BoostManager::class, fn (): \Laravel\Boost\BoostManager => new \Laravel\Boost\BoostManager);
     }

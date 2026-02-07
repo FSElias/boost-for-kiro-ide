@@ -16,8 +16,8 @@ Laravel Boost accelerates AI-assisted development by providing the essential con
 
 ## Requirements
 
-- PHP 8.1 or higher
-- Laravel 10.x, 11.x or 12.x
+- PHP 8.2 or higher
+- Laravel 11.x or 12.x
 - [Laravel Boost](https://github.com/laravel/boost) ^2.0
 - Kiro IDE installed on your system
 
@@ -206,8 +206,8 @@ This package is designed to be compatible with all versions of Laravel Boost ^2.
 ### Tested Versions
 
 - Laravel Boost: ^2.0
-- Laravel: 10.x, 11.x, 12.x
-- PHP: 8.1, 8.2, 8.3
+- Laravel: 11.x, 12.x
+- PHP: 8.2, 8.3, 8.4
 
 ## Automatic Detection
 

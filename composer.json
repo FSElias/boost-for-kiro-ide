@@ -22,14 +22,14 @@
         "source": "https://github.com/jotafurtado/boost-for-kiro-ide"
     },
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "laravel/boost": "^2.0"
     },
     "require-dev": {
         "laravel/pint": "^1.20",
         "mockery/mockery": "^1.6.12",
-        "orchestra/testbench": "^8.36.0|^9.15.0|^10.6",
-        "pestphp/pest": "^2.36.0|^3.8.4",
+        "orchestra/testbench": "^9.15.0|^10.6",
+        "pestphp/pest": "^3.8.4",
         "phpstan/phpstan": "^2.1"
     },
     "autoload": {
