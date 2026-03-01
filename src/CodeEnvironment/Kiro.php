@@ -64,7 +64,7 @@ class Kiro extends Agent implements SupportsGuidelines, SupportsMcp, SupportsSki
 
     public function guidelinesPath(): string
     {
-        return '.kiro/steering/laravel-boost.md';
+        return config('boost.agents.kiro.guidelines_path', 'AGENTS.md');
     }
 
     public function skillsPath(): string
