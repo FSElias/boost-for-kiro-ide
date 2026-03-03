@@ -132,6 +132,21 @@ After installation, Kiro will have access to all Laravel Boost MCP tools, includ
 - **Tinker**: Execute arbitrary code in the application context
 - And much more...
 
+## Custom Guidelines Path
+
+By default, Kiro's AI guidelines are stored at `.kiro/steering/laravel-boost.md`, following Kiro's native steering convention. This allows you to take advantage of Kiro-specific features like frontmatter-based inclusion rules and file references.
+
+If your team uses multiple AI-powered IDEs and prefers a shared guidelines file (e.g., `AGENTS.md`), you can customize the path via configuration:
+
+```php
+// config/boost.php
+'agents' => [
+    'kiro' => [
+        'guidelines_path' => 'AGENTS.md',
+    ],
+],
+```
+
 ## Updating Guidelines
 
 To keep your AI guidelines up to date with the latest versions of installed Laravel ecosystem packages, run:
