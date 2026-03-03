@@ -2,6 +2,22 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.0.4] - 2026-03-03
+
+### Added
+
+- Made `guidelinesPath()` configurable via `boost.agents.kiro.guidelines_path` config key
+- Added "Custom Guidelines Path" section to README documenting the new configuration option
+
+### Changed
+
+- Default guidelines path remains `.kiro/steering/laravel-boost.md` (Kiro's native steering convention)
+- Teams using multiple AI IDEs can now opt in to `AGENTS.md` or any custom path via configuration
+
+### Credits
+
+- Thanks to [@FSElias](https://github.com/FSElias) for the initial implementation in [#6](https://github.com/jotafurtado/boost-for-kiro-ide/pull/6)
+
 ## [2.0.3] - 2026-02-07
 
 ### Changed
