@@ -72,6 +72,11 @@ class Kiro extends Agent implements SupportsGuidelines, SupportsMcp, SupportsSki
         return '.kiro/skills';
     }
 
+    public function hooksPath(): string
+    {
+        return '.kiro/hooks';
+    }
+
     public function frontmatter(): bool
     {
         return false;
