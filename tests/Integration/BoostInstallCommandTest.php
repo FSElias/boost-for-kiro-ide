@@ -7,6 +7,7 @@ use Laravel\Boost\Boost;
 use Laravel\Boost\Contracts\SupportsGuidelines;
 use Laravel\Boost\Contracts\SupportsMcp;
 use Laravel\Boost\Contracts\SupportsSkills;
+use Laravel\Boost\Install\Agents\Agent;
 use Laravel\Boost\Install\AgentsDetector;
 use Laravel\Boost\Install\Enums\McpInstallationStrategy;
 use Laravel\Boost\Install\Enums\Platform;
@@ -64,7 +65,7 @@ describe('Boost Install Command Integration', function () {
         $kiro = app(Kiro::class);
 
         expect($kiro)
-            ->toBeInstanceOf(\Laravel\Boost\Install\Agents\Agent::class)
+            ->toBeInstanceOf(Agent::class)
             ->toBeInstanceOf(SupportsGuidelines::class)
             ->toBeInstanceOf(SupportsMcp::class)
             ->toBeInstanceOf(SupportsSkills::class);

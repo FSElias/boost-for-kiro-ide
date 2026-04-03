@@ -20,7 +20,7 @@ class HookInstaller
     /**
      * Install all eligible Boost prompts as Kiro hooks.
      *
-     * @return array<string, int>
+     * @return array<string, HookWriter::WRITTEN|HookWriter::UPDATED|HookWriter::FAILED>
      */
     public function install(): array
     {

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Tests\TestCase;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +14,5 @@ declare(strict_types=1);
 |
 */
 
-uses(Tests\TestCase::class)->in('Unit');
-uses(Tests\TestCase::class)->in('Integration');
+uses(TestCase::class)->in('Unit');
+uses(TestCase::class)->in('Integration');
