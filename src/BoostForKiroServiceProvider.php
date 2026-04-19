@@ -18,7 +18,10 @@ class BoostForKiroServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (class_exists(Boost::class)) {
-            Boost::registerAgent('kiro', Kiro::class);
+            $agents = Boost::getAgents();
+            if (! array_key_exists('kiro', $agents)) {
+                Boost::registerAgent('kiro', Kiro::class);
+            }
         }
     }
 }

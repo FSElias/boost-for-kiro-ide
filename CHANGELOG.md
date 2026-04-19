@@ -2,6 +2,19 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.1.0] - 2026-04-19
+
+### Changed
+
+- Updated `orchestra/testbench` dependency to `^9.15.0|^10.6|^11.0` to test against Laravel 13 features locally
+- Updated `pestphp/pest` dependency to `^3.8.4|^4.0` for Laravel 13 compatibility
+- Fixed `BoostForKiroServiceProvider` throwing `InvalidArgumentException` on newer `laravel/boost` versions that natively include Kiro
+- Updated tests to dynamically resolve agent class names natively from boost or from local namespace
+
+### Deprecated
+
+- This package is now **abandoned**. `laravel/boost` (v2.4+) natively ships with Kiro IDE support, rendering this extension redundant.
+
 ## [2.0.4] - 2026-03-03
 
 ### Added

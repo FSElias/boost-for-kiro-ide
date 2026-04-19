@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use Exception;
 use Jcf\BoostForKiro\BoostForKiroServiceProvider;
 use Jcf\BoostForKiro\CodeEnvironment\Kiro;
 use Laravel\Boost\Boost;
 use Laravel\Boost\Install\Detection\DetectionStrategyFactory;
+use ReflectionClass;
 
 describe('ServiceProvider Registration Integration', function () {
     it('boots without throwing exceptions', function () {
@@ -18,12 +20,13 @@ describe('ServiceProvider Registration Integration', function () {
         expect($agents)
             ->toBeArray()
             ->toHaveKey('kiro')
-            ->and($agents['kiro'])
-            ->toBe(Kiro::class);
+            ->and(class_basename($agents['kiro']))
+            ->toBe('Kiro');
     });
 
     it('allows kiro agent to be resolved from container', function () {
-        expect(app(Kiro::class))->toBeInstanceOf(Kiro::class);
+        $kiroClass = Boost::getAgents()['kiro'];
+        expect(app($kiroClass))->toBeInstanceOf($kiroClass);
     });
 
     it('service provider can be instantiated without exceptions', function () {

@@ -11,8 +11,8 @@ it('registers kiro agent via Boost facade during boot', function () {
 
     expect($agents)
         ->toHaveKey('kiro')
-        ->and($agents['kiro'])
-        ->toBe(Kiro::class);
+        ->and(class_basename($agents['kiro']))
+        ->toBe('Kiro');
 });
 
 // Example 2: Registro não acontece no register()

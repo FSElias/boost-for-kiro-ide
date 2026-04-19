@@ -1,5 +1,10 @@
 # Boost for Kiro IDE
 
+> **⚠️ DEPRECATED / ABANDONED**
+>
+> **This package is now officially abandoned.** 
+> `laravel/boost` (v2.4+) now natively includes full support for Kiro IDE. There is no longer any need to use this complementary package. You can safely remove it from your projects (`composer remove --dev jcf/boost-for-kiro-ide`) and rely entirely on the official `laravel/boost` installation.
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jcf/boost-for-kiro-ide.svg?style=flat-square)](https://packagist.org/packages/jcf/boost-for-kiro-ide)
 [![Total Downloads](https://img.shields.io/packagist/dt/jcf/boost-for-kiro-ide.svg?style=flat-square)](https://packagist.org/packages/jcf/boost-for-kiro-ide)
 [![License](https://img.shields.io/packagist/l/jcf/boost-for-kiro-ide.svg?style=flat-square)](https://packagist.org/packages/jcf/boost-for-kiro-ide)

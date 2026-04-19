@@ -7,6 +7,7 @@ use Laravel\Boost\Boost;
 use Laravel\Boost\Contracts\SupportsGuidelines;
 use Laravel\Boost\Contracts\SupportsMcp;
 use Laravel\Boost\Contracts\SupportsSkills;
+use Laravel\Boost\Install\Agents\Agent;
 use Laravel\Boost\Install\AgentsDetector;
 use Laravel\Boost\Install\Enums\McpInstallationStrategy;
 use Laravel\Boost\Install\Enums\Platform;
@@ -16,14 +17,14 @@ describe('Boost Install Command Integration', function () {
         $agents = Boost::getAgents();
 
         expect($agents)->toHaveKey('kiro')
-            ->and($agents['kiro'])->toBe(Kiro::class);
+            ->and(class_basename($agents['kiro']))->toBe('Kiro');
     });
 
     it('kiro agent can be instantiated from registry', function () {
         $agents = Boost::getAgents();
         $kiro = app($agents['kiro']);
 
-        expect($kiro)->toBeInstanceOf(Kiro::class)
+        expect(class_basename($kiro))->toBe('Kiro')
             ->and($kiro->name())->toBe('kiro')
             ->and($kiro->displayName())->toBe('Kiro');
     });
@@ -64,7 +65,7 @@ describe('Boost Install Command Integration', function () {
         $kiro = app(Kiro::class);
 
         expect($kiro)
-            ->toBeInstanceOf(\Laravel\Boost\Install\Agents\Agent::class)
+            ->toBeInstanceOf(Agent::class)
             ->toBeInstanceOf(SupportsGuidelines::class)
             ->toBeInstanceOf(SupportsMcp::class)
             ->toBeInstanceOf(SupportsSkills::class);
@@ -77,7 +78,7 @@ describe('Boost Install Command Integration', function () {
         $kiroInstance = $agents->first(fn ($agent) => $agent->name() === 'kiro');
 
         expect($kiroInstance)->not->toBeNull()
-            ->and($kiroInstance)->toBeInstanceOf(Kiro::class)
+            ->and(class_basename($kiroInstance))->toBe('Kiro')
             ->and($kiroInstance)->toBeInstanceOf(SupportsGuidelines::class)
             ->and($kiroInstance)->toBeInstanceOf(SupportsMcp::class);
     });
