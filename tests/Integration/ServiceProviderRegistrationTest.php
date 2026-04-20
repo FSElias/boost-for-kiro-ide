@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-use Exception;
 use Jcf\BoostForKiro\BoostForKiroServiceProvider;
 use Jcf\BoostForKiro\CodeEnvironment\Kiro;
 use Laravel\Boost\Boost;
 use Laravel\Boost\Install\Detection\DetectionStrategyFactory;
-use ReflectionClass;
 
 describe('ServiceProvider Registration Integration', function () {
     it('boots without throwing exceptions', function () {

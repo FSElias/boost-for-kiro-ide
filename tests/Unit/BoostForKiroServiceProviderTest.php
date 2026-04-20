@@ -15,16 +15,14 @@ it('registers kiro agent via Boost facade during boot', function () {
         ->toBe('Kiro');
 });
 
-// Example 2: Registro não acontece no register()
-it('does not register kiro during register phase', function () {
+// Example 2: HookInstaller é registrado no register()
+it('binds HookInstaller during register phase', function () {
     $source = file_get_contents(__DIR__.'/../../src/BoostForKiroServiceProvider.php');
     $registerMatch = preg_match('/function register\(\).*?\{(.*?)\}/s', $source, $matches);
 
     expect($registerMatch)->toBe(1);
 
-    $registerBody = trim($matches[1]);
-    $withoutComments = trim(preg_replace('#//.*$#m', '', $registerBody));
-    expect($withoutComments)->toBe('');
+    expect($matches[1])->toContain('$this->app->singleton(HookInstaller::class');
 });
 
 // Example 3: ServiceProvider trata ausência do Boost graciosamente

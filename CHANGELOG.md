@@ -2,6 +2,17 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.2.0] - 2026-04-19
+
+### Added
+
+- Added Prompt-to-Hook conversion: Boost MCP prompts are now automatically converted into Kiro Agent Hooks.
+- Added `boost:kiro-hooks` command to manually sync hooks.
+
+### Changed
+
+- **Un-deprecated:** This package is no longer abandoned! It now provides essential Kiro-specific hook syncing that is not natively available in `laravel/boost`.
+
 ## [2.1.0] - 2026-04-19
 
 ### Changed

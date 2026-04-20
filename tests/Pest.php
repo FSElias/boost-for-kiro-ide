@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Tests\TestCase;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,8 +13,6 @@ declare(strict_types=1);
 | need to change it using the "uses()" function to bind a different classes or traits.
 |
 */
-
-use Tests\TestCase;
 
 uses(TestCase::class)->in('Unit');
 uses(TestCase::class)->in('Integration');
