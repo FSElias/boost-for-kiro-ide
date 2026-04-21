@@ -2,6 +2,16 @@
 
 All notable changes to `boost-for-kiro-ide` will be documented in this file.
 
+## [2.3.0] - 2026-04-21
+
+### Changed
+
+- **BREAKING**: Updated `laravel/boost` base dependency to `^2.4`.
+- **BREAKING**: Removed native Kiro CodeEnvironment registration, as Boost 2.4+ natively supports Kiro IDE and registers Kiro agents and MCP servers out-of-the-box.
+- Migrated default guidelines orientation to `AGENTS.md` (now handled natively by Laravel Boost).
+- Rewrote the package's focus strictly as a "Prompt-to-Hook" converter extension for the Kiro IDE.
+- Officially added Laravel 13.x compatibility testing and support.
+
 ## [2.2.0] - 2026-04-19
 
 ### Added

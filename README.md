@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/jcf/boost-for-kiro-ide.svg?style=flat-square)](https://packagist.org/packages/jcf/boost-for-kiro-ide)
 [![License](https://img.shields.io/packagist/l/jcf/boost-for-kiro-ide.svg?style=flat-square)](https://packagist.org/packages/jcf/boost-for-kiro-ide)
 
-Adds support for Amazon's **Kiro IDE** in [Laravel Boost](https://github.com/laravel/boost), integrating the MCP (Model Context Protocol) server and AI guidelines specifically designed for Kiro.
+Empowers Amazon's **Kiro IDE** within [Laravel Boost](https://github.com/laravel/boost). While Laravel Boost 2.4+ now natively configures Kiro IDE, **this package remains indispensable**. Kiro IDE does not currently understand MCP Prompts natively. This package acts as your "Hook Superpower," seamlessly translating all rich Boost MCP recommendations and commands into interactive **Agent Hooks** (`.kiro/hooks/*.hook`), enabling you to trigger them visually right from the Kiro interface.
 
 ## About Kiro IDE
 
@@ -17,8 +17,8 @@ Laravel Boost accelerates AI-assisted development by providing the essential con
 ## Requirements
 
 - PHP 8.2 or higher
-- Laravel 11.x or 12.x
-- [Laravel Boost](https://github.com/laravel/boost) ^2.0
+- Laravel 11.x, 12.x or 13.x
+- [Laravel Boost](https://github.com/laravel/boost) ^2.4
 - Kiro IDE installed on your system
 
 ## Installation
@@ -31,8 +31,8 @@ composer require jcf/boost-for-kiro-ide --dev
 
 The package automatically registers Kiro IDE with Laravel Boost through Laravel's auto-discovery.
 
-> **✨ Laravel Boost v2.0 Improvements**  
-> This package is fully compatible with Laravel Boost v2.0, which brings an enhanced installation experience with improved code environment detection, streamlined configuration, and the powerful new Skills system. After installation, you'll have access to the `boost:add-skill` command to extend Kiro's capabilities with specialized AI instructions.
+> **✨ Laravel Boost v2.4+ Native Support**  
+> Starting with version 2.4, Laravel Boost creates the Kiro Agent and registers MCP capabilities out-of-the-box. The industry standard `AGENTS.md` file is now used natively, replacing the old `.kiro/steering/laravel-boost.md`. This is fantastic because it centralizes all AI guidelines in a single, unified file, cutting down on token waste and improving context retention. This package builds exactly on top of that official integration, focusing entirely on expanding your Hook arsenal.
 
 ## Usage
 
@@ -47,10 +47,10 @@ php artisan boost:install
 
 ### 2. Configure Kiro IDE
 
-When running the `php artisan boost:install` command, Kiro IDE will appear as an available option. Select it to automatically configure:
+When running the `php artisan boost:install` command, Kiro IDE will appear as an available option natively in Boost. Select it to automatically configure:
 
 - **MCP Configuration**: Created at `.kiro/settings/mcp.json`
-- **AI Guidelines**: Created at `.kiro/steering/laravel-boost.md`
+- **AI Guidelines**: Added to the industry standard `AGENTS.md` in your project root.
 
 ### 3. Activate in Kiro IDE
 
@@ -60,7 +60,7 @@ In Kiro IDE:
 2. Search for "MCP: Reconnect All Servers" and press `Enter`
 3. The `laravel-boost` MCP server will be automatically detected and connected
 
-Kiro automatically loads the AI guidelines from `.kiro/steering/laravel-boost.md` to provide contextualized assistance for your Laravel application.
+Kiro automatically loads your AI guidelines from `AGENTS.md` to provide contextualized, highly-efficient assistance for your Laravel application.
 
 ### 4. Extend with Skills (Optional)
 
@@ -110,17 +110,16 @@ php artisan boost:add-skill laravel/boost-skill-testing
 
 After installation, the following files will be created in your Laravel project:
 
-```
+```text
 .kiro/
 ├── hooks/
 │   ├── boost-prompt-laravel-code-simplifier.kiro.hook
 │   ├── boost-prompt-upgrade-inertia-v3.kiro.hook
 │   ├── boost-prompt-upgrade-laravel-v13.kiro.hook
 │   └── boost-prompt-upgrade-livewire-v4.kiro.hook
-├── settings/
-│   └── mcp.json           # MCP server configuration
-└── steering/
-    └── laravel-boost.md   # AI guidelines for Kiro
+└── settings/
+    └── mcp.json           # MCP server configuration
+AGENTS.md                  # Unified AI guidelines (created by Boost natively)
 ```
 
 The hooks in `.kiro/hooks/` are automatically generated from Laravel Boost's MCP prompts (see [Prompt-to-Hook Conversion](#prompt-to-hook-conversion) below).
@@ -145,20 +144,7 @@ After installation, Kiro will have access to all Laravel Boost MCP tools, includ
 - **Tinker**: Execute arbitrary code in the application context
 - And much more...
 
-## Custom Guidelines Path
 
-By default, Kiro's AI guidelines are stored at `.kiro/steering/laravel-boost.md`, following Kiro's native steering convention. This allows you to take advantage of Kiro-specific features like frontmatter-based inclusion rules and file references.
-
-If your team uses multiple AI-powered IDEs and prefers a shared guidelines file (e.g., `AGENTS.md`), you can customize the path via configuration:
-
-```php
-// config/boost.php
-'agents' => [
-    'kiro' => [
-        'guidelines_path' => 'AGENTS.md',
-    ],
-],
-```
 
 ## Updating Guidelines
 
@@ -262,8 +248,8 @@ This package is designed to be compatible with all versions of Laravel Boost ^2.
 
 ### Tested Versions
 
-- Laravel Boost: ^2.0
-- Laravel: 11.x, 12.x
+- Laravel Boost: ^2.4
+- Laravel: 11.x, 12.x, 13.x
 - PHP: 8.2, 8.3, 8.4
 
 ## Automatic Detection
@@ -319,6 +305,7 @@ If you discover any security related issues, please email jotacfurtado@gmail.com
 
 - [João C. Furtado](https://github.com/jotafurtado)
 - [Laravel Boost](https://github.com/laravel/boost) - Original package that this extends
+- Huge thanks to the community contributor who submitted PR-7, bringing the incredible Prompt-to-Hook translation feature to life.
 - [All Contributors](../../contributors)
 
 ## License
